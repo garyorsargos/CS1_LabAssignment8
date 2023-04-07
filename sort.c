@@ -11,7 +11,22 @@ Submission for "Lab Assignment 8"
 int extraMemoryAllocated;
 
 void heapify(int input[], int n, int root){
+	int largest = root, temp;
+    int l = (2 * root) + 1;
+    int r = (2 * root) + 2;
+ 
+    if (l < n && input[l] > input[largest])
+        largest = l;
 
+    if (r < n && input[r] > input[largest])
+        largest = r;
+
+    if (largest != root) {
+        int temp = input[root];
+    	input[root] = input[largest];
+    	input[largest] = temp;
+        heapify(input, n, largest); // recursively call heapify
+    }
 }
 // implements heap sort
 // extraMemoryAllocated counts bytes of memory allocated
