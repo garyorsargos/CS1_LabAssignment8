@@ -10,22 +10,24 @@ Submission for "Lab Assignment 8"
 
 int extraMemoryAllocated;
 
-void heapify(int input[], int n, int root){
+void maxHeapify(int input[], int n, int root){
 	int largest = root, temp;
     int l = (2 * root) + 1;
     int r = (2 * root) + 2;
  
+	//compare if the left or right is bigger than the root index
     if (l < n && input[l] > input[largest])
         largest = l;
 
     if (r < n && input[r] > input[largest])
         largest = r;
 
+	//if there is a larger child, then swap and call heapify on the subtree
     if (largest != root) {
         int temp = input[root];
     	input[root] = input[largest];
     	input[largest] = temp;
-        heapify(input, n, largest); // recursively call heapify
+        maxHeapify(input, n, largest); // recursively call heapify
     }
 }
 // implements heap sort
