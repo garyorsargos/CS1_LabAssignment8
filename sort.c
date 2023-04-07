@@ -10,18 +10,67 @@ Submission for "Lab Assignment 8"
 
 int extraMemoryAllocated;
 
+void heapify(int input[], int n, int root){
+
+}
 // implements heap sort
 // extraMemoryAllocated counts bytes of memory allocated
 void heapSort(int arr[], int n)
 {
 }
 
-
-// implement merge sort
-// extraMemoryAllocated counts bytes of extra memory allocated
-void mergeSort(int pData[], int l, int r)
-{
+//used during the merge sort algorithm
+void merge(int arr[], int left, int middle, int right) {
+  //set sizes for the different parts of the subarray (left and right)
+  int sizeL = middle - left + 1;
+  int sizeR = right - middle;
+  //allocate memory for subarrays, then insert the items to their respective array
+  int x, y, z;
+  int *rightArr = (int *)malloc(sizeR * sizeof(int));
+  int *leftArr = (int *)malloc(sizeL * sizeof(int));
+  extraMemoryAllocated += sizeof(int)*2;
+  for (y = 0; y < sizeR; y++)
+    rightArr[y] = arr[middle+y+1];
+  for (x = 0; x < sizeL; x++)
+    leftArr[x] = arr[left + x];
+  int leftCount = 0, rightCount = 0, merged = left;
+  //merge the two new subarrays back together in ascending number order
+  while (rightCount < sizeR && leftCount < sizeL) {
+    if (leftArr[leftCount] <= rightArr[rightCount]) {
+      arr[merged] = leftArr[leftCount];
+      leftCount++;
+    } else {
+      arr[merged] = rightArr[rightCount];
+      rightCount++;
+    }
+    merged++;
+  }
+  //if the two arrays are not the same length, these loops will fill pData array with the remaining data
+  while (leftCount < sizeL) {
+    arr[merged] = leftArr[leftCount];
+    leftCount++;
+    merged++;
+  }
+  while (rightCount < sizeR) {
+    arr[merged] = rightArr[rightCount];
+    rightCount++;
+    merged++;
+  }
+  //free memory
+  free(rightArr);
+  free(leftArr);
 }
+// implement merge sort (the above function is also used in this implementation)
+// extraMemoryAllocated counts bytes of extra memory allocated
+void mergeSort(int pData[], int left, int right) {
+  if (left < right) {
+    int middle = (left + right)/2;
+    mergeSort(pData, middle + 1, right);
+    mergeSort(pData, left, middle);
+    merge(pData, left, middle, right);
+  }
+}
+
 
 // parses input file to an integer array
 int parseData(char *inputFileName, int **ppData)
