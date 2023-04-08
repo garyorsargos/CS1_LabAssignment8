@@ -34,6 +34,17 @@ void maxHeapify(int input[], int n, int root){
 // extraMemoryAllocated counts bytes of memory allocated
 void heapSort(int arr[], int n)
 {
+	int temp;
+	for(int i = n/2 - 1; i >= 0; i--){
+		maxHeapify(arr, n, i);
+	}
+	for(int i = n-1; i >= 0; i--){
+		//swap the root node to the end of the array, then re-heapify
+		temp = arr[0];
+		arr[0] = arr[i];
+		arr[i] = temp;
+		maxHeapify(arr, i, 0);
+	}
 }
 
 //used during the merge sort algorithm
