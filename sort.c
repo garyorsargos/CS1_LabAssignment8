@@ -137,10 +137,8 @@ void printArray(int pData[], int dataSz)
 {
 	int i, sz = dataSz - 100, prevData = -1;
 	printf("\tData:\n\t");
-	for (i=0;i<100;++i)
+	for (i=0;i<100 && i < dataSz;++i)
 	{
-		if(pData[i] == 0 && prevData != 0 && prevData != -1)
-			break;
 		printf("%d ",pData[i]);
 		prevData = pData[i];
 	}
