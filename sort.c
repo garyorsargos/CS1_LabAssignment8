@@ -139,16 +139,17 @@ void printArray(int pData[], int dataSz)
 	printf("\tData:\n\t");
 	for (i=0;i<100;++i)
 	{
-		if(pData[i] == 0 && pData[prevData] != 0)
+		if(pData[i] == 0 && prevData != 0 && prevData != -1)
 			break;
 		printf("%d ",pData[i]);
 		prevData = pData[i];
 	}
 	printf("\n\t");
-	
-	for (i=sz;i<dataSz;++i)
-	{
-		printf("%d ",pData[i]);
+	if(i<dataSz){
+		for (i=sz;i<dataSz;++i)
+		{
+			printf("%d ",pData[i]);
+		}
 	}
 	printf("\n\n");
 }
